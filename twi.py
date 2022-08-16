@@ -31,12 +31,19 @@ client = tweepy.Client(
 
 def printTweetBySearch(s):
     tweets = client.search_recent_tweets(
-        query='レシピ',  # 検索ワード
-        max_results=20  # 取得件数
+        query='レシピ 卵',  # 検索ワード
+        max_results=100,  # 取得件数
+        tweet_fields = ['public_metrics']
     )
 
-    print(tweets)                  # ツイート内容
-    
+    # print(tweets)                  # ツイート内容
+    for tweet in tweets.data:
+        if tweet.public_metrics["like_count"] > 5:
+            print("--------------------")
+            print(tweet.id)
+            print(tweet.public_metrics["like_count"])
+            print(tweet.text)
+
 def main():
     printTweetBySearch('レシピ')
 
