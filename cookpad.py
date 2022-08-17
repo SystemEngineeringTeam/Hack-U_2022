@@ -16,7 +16,7 @@ def crawler(food):
 
     options = webdriver.ChromeOptions()
     #画面を表示しない
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     #GPUハードウェアアクセラレーションを無効にする
     options.add_argument('--disable-gpu')
     #ウィンドウサイズの指定
@@ -30,22 +30,21 @@ def crawler(food):
     driver = webdriver.Chrome(options=options)
 
     driver.get('https://cookpad.com')
-    links = get_link(food,driver)
+    titles,links = get_link(food,driver)
 
     ingredients = []
     for link in links:
       driver.get(link)
       ingredients.append(search_ingredients(driver))
-      time.sleep(5)
+      time.sleep(1)
     
-    
+    # print(ingredients)
     #for DEBUG
     # driver.get('https://cookpad.com/recipe/1999481')
     # ingredients = search_ingredients(driver)
-    # print(ingredients)
 
     driver.close()
-    return ingredients
+    return titles,links,ingredients
 
 
 # 指定したワードで検索し，リンクを取得
@@ -54,11 +53,13 @@ def get_link(food,driver):
     search_box.send_keys(food)
     search_box.submit()
     # 各レシピのリンクを取得する
+    titles = []
     links = []
     for recipe in driver.find_elements(by=By.CLASS_NAME, value='recipe-title'):
+      titles.append(recipe.text)
       links.append(recipe.get_attribute("href"))
     
-    return links
+    return titles,links
 
 
 #食材と量を辞書型で返す
@@ -72,3 +73,8 @@ def search_ingredients(driver):
     
     return ingredients
 
+# def main():
+#   crawler('もやし')
+
+# if __name__ == "__main__":
+#     main()
