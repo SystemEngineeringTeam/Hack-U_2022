@@ -4,16 +4,24 @@ from bottle import route, run, template, redirect, request
 import pandas as pd
 import numpy as np
 import dask.dataframe as dd
+import cookpad
+import twi
 
 
-calorie = pd.read_csv("calorie.csv")
-print(calorie.dtypes)
+def main():
+    food = "卵"
+    #辞書を要素に持つリストが帰る
+    ingredients = cookpad.crawler(food)
 
-food = "卵"
+    calorie = pd.read_csv("calorie.csv")
+    # print(calorie.dtypes)
 
-searched = calorie[calorie['food_name'].str.contains(food)]
-print(searched)
 
+    searched = calorie[calorie['food_name'].str.contains(food)]
+    print(searched)
+
+if __name__ == "__main__":
+    main()
 # @route('/hello')
 # def hello():
 #     return "Hello World!"
