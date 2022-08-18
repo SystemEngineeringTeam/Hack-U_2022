@@ -7,3 +7,12 @@ desktop.ini
 .Spotlight-V100
 .Trashes
 ._*
+
+#enviroment
+.env
+
+#python
+__pycache__/
+*.py[cod]
+*$py.class
+
