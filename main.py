@@ -13,40 +13,35 @@ df_calorie = pd.read_csv('calorie.csv')
 # food_name      object
 # cal             int64
 
-
+# 日本標準食品成分表をもとにカロリーを計算する
 def calc_calorie(ingredients, quantites):
-    cal=0
+    cal = 0
     for ingredient, quantity in zip(ingredients.values(), quantites.values()):
       print(ingredient, quantity)
-      searched =  df_calorie[df_calorie['food_name'].str.contains(ingredient)]
-
-      #DBに該当データがあった場合
+      #DBを検索
+      searched = df_calorie[df_calorie['food_name'].str.contains(ingredient)]
+      #DBに該当する食材があった場合
       if(len(searched.index) > 0):
         print(quantity)
         quantity_int = quantity_convert(quantity)
         print(quantity_int)
         cal += searched. iat[0, 2].item() * quantity_int / 100
-        # print(cal)
-      
-      # print(ingredient)
-      # print(searched)
-      # print(cal)
-    return cal
+    return int(cal)
 
-
+#　表記揺れのある分量表記を，グラムに変換する
 def quantity_convert(quantity):
     # 何g
     if re.match('\d* g', quantity):
       return int(re.sub(r"\D", "", quantity))
 
-#TODO 1/2を12として計算してしまう
+    #TODO 1/2を12として計算してしまう
     # 大さじ
     if '大さじ' in quantity:
       return int(re.sub(r"\D", "", quantity))*15
     # 小さじ
     if '小さじ' in quantity:
       return int(re.sub(r"\D", "", quantity))*5
-    
+
     match quantity:
       case _:
         return 5
@@ -56,9 +51,11 @@ def quantity_convert(quantity):
 def main():
 # スクレイピングしてjsonに書き込む
     with open('recipe.json', 'w') as f:
-      food = '豚肉'
+      food = '豚肉'      #検索したい食材
       #辞書を要素に持つリストが返る
       titles, links, images, ingredients_list, quantities_list = cookpad.crawler(food)
+      
+      #ダミーデータ
       # titles = ['簡単♪もやしと豚バラのマヨぽん炒め！', '白菜と豚の煮物', 'グラム100円の豚肉を最高のトンテキに！', '豚肉となす・みょうがの酢醤油炒め', '豚肉の蒲焼き丼', 'モロヘイヤと豚肉のスタミナ炒め', 'キウイでご馳走！柔らか豚ピッツァイオーラ', '簡単にできちゃう！豚肉のピタカ', '豚バラとじゃがいものあまからに', '梅豚', '豚のしょうが焼き']
       # links = ['https://cookpad.com/recipe/6296894', 'https://cookpad.com/recipe/7290841', 'https://cookpad.com/recipe/7290797', 'https://cookpad.com/recipe/7290618', 'https://cookpad.com/recipe/7290653', 'https://cookpad.com/recipe/7290397', 'https://cookpad.com/recipe/7279592', 'https://cookpad.com/recipe/7290402', 'https://cookpad.com/recipe/7290250', 'https://cookpad.com/recipe/7290245', 'https://cookpad.com/dining/recipes/2763067']
       # images = ['https://img.cpcdn.com/recipes/6296894/894x1461s/1ae484c5209e922e705523a0c1b1cf80?u=23975908&p=1592096864', 'https://img.cpcdn.com/recipes/7290841/894x1461s/e6ee02ccd2cfa4e68400c1f7e19b3241?u=45939868&p=1661083416', 'https://img.cpcdn.com/recipes/7290797/894x1461s/377c51776e72345ec34bbc387923899b?u=5466776&p=1661081383', 'https://img.cpcdn.com/recipes/7290618/894x1461s/af552d2b4cda9fb9fef136babadd0e0a?u=47380115&p=1661080066', 'https://img.cpcdn.com/recipes/7290653/894x1461s/c61d95996b2a73967854080612ae55c7?u=10162422&p=1661074791', 'https://img.cpcdn.com/recipes/7290397/894x1461s/69051384bcc07d65d531a575bc9e16f2?u=7852572&p=1661065260', 'https://img.cpcdn.com/recipes/7279592/894x1461s/7dd70acc6646a0b7216a0333320321fa?u=44510773&p=1660093231', 'https://img.cpcdn.com/recipes/7290402/894x1461s/a3372cf2b5750179c787ba554f5f7014?u=2277874&p=1661063561', 'https://img.cpcdn.com/recipes/7290250/894x1461s/458dbc44fd72c08044a74a0829642385?u=1708736&p=1661055142', 'https://assets.cpcdn.com/assets/blank_logo_recipe_large.png?1b12035e517eeddc39631fb65f35fcad69e4b14bf9275634c54589903d659823', '']
@@ -66,9 +63,13 @@ def main():
       # quantities_list = [{0: '約100g', 1: '5枚', 2: '適量', 3: '小さじ1/2〜', 4: '小さじ1/2〜', 5: 'あれば、お好みで。', 6: 'あれば、お好みで♪'}, {0: '4/1', 1: '500cc', 2: '適量', 3: '大さじ3', 4: '大さじ3', 5: '大さじ1'}, {0: '１枚又は２枚', 1: '下味程度', 2: '豚肉にまぶす程度', 3: '１片', 4: '大さじ２', 5: '大さじ１', 6: '大さじ１', 7: '砂糖', 8: '３振り', 9: '５g'}, {0: '200g', 1: '3個', 2: '1パック', 3: '少々', 4: '適量', 5: '大さじ1.5', 6: '大さじ1.5'}, {0: '400g程', 1: '適量', 2: '１パック', 3: 'お好み', 4: '大さじ8', 5: '大さじ8', 6: '大さじ8', 7: '大さじ8'}, {0: '1 袋', 1: '200g', 2: '1/2個', 3: '1欠け', 4: '大さじ1', 5: '大さじ1', 6: '大さじ1', 7: '大さじ1'}, {0: '３～４枚(250～300g)', 1: '１個', 2: '小さじ1/3', 3: '大さじ2', 4: '大さじ1', 5: '少々', 6: '少々', 7: '好きなだけ', 8: '適量'}, {0: '500g', 1: '適量', 2: '大さじ3', 3: '少々', 4: '3個', 5: '少々'}, {0: '５個ぐらい', 1: '１パック', 2: '5本', 3: '１袋', 4: '２枚'}, {0: '100g', 1: '少々', 2: '1個', 3: '少々', 4: '1/2本', 5: '200cc', 6: '大3', 7: '大3', 8: '大1', 9: '6個', 10: '2個'}, {}]
 
       print(titles, links, images, ingredients_list, quantities_list)
+
       for title, link, image, ingredients, quantities in zip(titles, links, images, ingredients_list, quantities_list):
+        #カロリー計算
         cal = calc_calorie(ingredients, quantities)
+        #json用に辞書型に変形
         d = {'title':title, 'ingredients':ingredients, 'quantities':quantities, 'calorie':cal, 'image':image, 'link':link}
+        #jsonに格納
         json.dump(d, f, indent = 4, ensure_ascii=False)
 
 #twitter
@@ -84,8 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# @route('/hello')
-# def hello():
-#     return "Hello World!"
-
-# run(host='localhost', port=8080, debug=True)
