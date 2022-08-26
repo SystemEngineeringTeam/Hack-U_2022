@@ -56,7 +56,7 @@ def main(food):
       f.write('[')
       # food = '豚肉'      #検索したい食材
       # 辞書を要素に持つリストが返る
-      titles, links, images, ingredients_list, quantities_list = cookpad.crawler(food)
+      # titles, links, images, ingredients_list, quantities_list = cookpad.crawler(food)
       
       #ダミーデータ
       titles = ['簡単♪もやしと豚バラのマヨぽん炒め！', '白菜と豚の煮物', 'グラム100円の豚肉を最高のトンテキに！', '豚肉となす・みょうがの酢醤油炒め', '豚肉の蒲焼き丼', 'モロヘイヤと豚肉のスタミナ炒め', 'キウイでご馳走！柔らか豚ピッツァイオーラ', '簡単にできちゃう！豚肉のピタカ', '豚バラとじゃがいものあまからに', '梅豚', '豚のしょうが焼き']
@@ -74,7 +74,9 @@ def main(food):
         d = {'title':title, 'ingredients':ingredients, 'quantities':quantities, 'calorie':cal, 'image':image, 'link':link}
         #jsonに格納
         json.dump(d, f, indent = 4, ensure_ascii=False)
-        f.write(',')
+        
+        if titles[-1] != title:
+          f.write(',')
       f.write(']')
       f.close()
 
