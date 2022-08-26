@@ -9,52 +9,49 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Favorite struct {
-	gorm.Model
-	Title         string
-	Ingredients1  string
-	Ingredients2  string
-	Ingredients3  string
-	Ingredients4  string
-	Ingredients5  string
-	Ingredients6  string
-	Ingredients7  string
-	Ingredients8  string
-	Ingredients9  string
-	Ingredients10 string
-	Ingredients11 string
-	Ingredients12 string
-	Ingredients13 string
-	Ingredients14 string
-	Ingredients15 string
-	Ingredients16 string
-	Ingredients17 string
-	Ingredients18 string
-	Ingredients19 string
-	Ingredients20 string
-	Quantity1     string
-	Quantity2     string
-	Quantity3     string
-	Quantity4     string
-	Quantity5     string
-	Quantity6     string
-	Quantity7     string
-	Quantity8     string
-	Quantity9     string
-	Quantity10    string
-	Quantity11    string
-	Quantity12    string
-	Quantity13    string
-	Quantity14    string
-	Quantity15    string
-	Quantity16    string
-	Quantity17    string
-	Quantity18    string
-	Quantity19    string
-	Quantity20    string
-	Calorie       string
-	Image         string
-	Link          string
+type Cooking struct {
+	Title       string `json:"title"`
+	Ingredients struct {
+		Num0 string `json:"0"`
+		Num1 string `json:"1"`
+		Num2 string `json:"2"`
+		Num3 string `json:"3"`
+		Num4 string `json:"4"`
+		Num5 string `json:"5"`
+		Num6 string `json:"6"`
+	} `json:"ingredients"`
+	Quantities struct {
+		Num0 string `json:"0"`
+		Num1 string `json:"1"`
+		Num2 string `json:"2"`
+		Num3 string `json:"3"`
+		Num4 string `json:"4"`
+		Num5 string `json:"5"`
+		Num6 string `json:"6"`
+	} `json:"quantities"`
+	Calorie float64 `json:"calorie"`
+	Image   string  `json:"image"`
+	Link    string  `json:"link"`
+}
+
+type Ingredients struct {
+	Num0 string `json:"0"`
+	Num1 string `json:"1"`
+	Num2 string `json:"2"`
+	Num3 string `json:"3"`
+	Num4 string `json:"4"`
+	Num5 string `json:"5"`
+	Num6 string `json:"6"`
+}
+
+type Quantities struct {
+	Num0 string `json:"0"`
+	Num1 string `json:"1"`
+	Num2 string `json:"2"`
+	Num3 string `json:"3"`
+	Num4 string `json:"4"`
+	Num5 string `json:"5"`
+	Num6 string `json:"6"`
 }
 
 func main() {
@@ -196,4 +193,52 @@ func sqlConnect() (database *gorm.DB) {
 	}
 
 	return db
+}
+
+type Favorite struct {
+	gorm.Model
+	Title         string
+	Ingredients1  string
+	Ingredients2  string
+	Ingredients3  string
+	Ingredients4  string
+	Ingredients5  string
+	Ingredients6  string
+	Ingredients7  string
+	Ingredients8  string
+	Ingredients9  string
+	Ingredients10 string
+	Ingredients11 string
+	Ingredients12 string
+	Ingredients13 string
+	Ingredients14 string
+	Ingredients15 string
+	Ingredients16 string
+	Ingredients17 string
+	Ingredients18 string
+	Ingredients19 string
+	Ingredients20 string
+	Quantity1     string
+	Quantity2     string
+	Quantity3     string
+	Quantity4     string
+	Quantity5     string
+	Quantity6     string
+	Quantity7     string
+	Quantity8     string
+	Quantity9     string
+	Quantity10    string
+	Quantity11    string
+	Quantity12    string
+	Quantity13    string
+	Quantity14    string
+	Quantity15    string
+	Quantity16    string
+	Quantity17    string
+	Quantity18    string
+	Quantity19    string
+	Quantity20    string
+	Calorie       string
+	Image         string
+	Link          string
 }
