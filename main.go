@@ -63,7 +63,7 @@ func main() {
 	//home.htmlに遷移
 	router.GET("/", func(ctx *gin.Context) {
 		//多言語json
-		json_lang_file, err := ioutil.ReadFile("json/sample.json")
+		json_lang_file, err := ioutil.ReadFile("json/recipe.json")
 		if err != nil {
 			log.Println("ReadError: ", err)
 			os.Exit(1)
