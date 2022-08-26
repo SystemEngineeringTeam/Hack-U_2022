@@ -8,6 +8,15 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
     <title>ホーム - food navi</title>
+    <style type="text/css" media="screen">
+        @charset "UTF-8";
+        .database {
+            width: 0px;
+            height: 0px;
+            opacity: 0;
+        }
+        
+    </style>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
@@ -143,18 +152,64 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 " >
                     {{ range .cooking }}
                     <div class="col">
+
                         <div class="card shadow-sm">
-                            <img src={{ .Image }}
+                            <img src="{{ .Image }}"
                                 width="460px" height="500px" fill="#55595c">
                             <div class="card-body">
-                                <p id ="title1" class="card-text">
+                                <p id class="card-text">
                                     <strong>{{ .Title }}</strong>
+                                    <br>　材料：分量
+                                    <br>　　{{ .Ingredients.Num1 }}  {{ .Quantities.Num1 }}
+                                    <br>　　{{ .Ingredients.Num2 }}  {{ .Quantities.Num2 }}
+                                    <br>　　{{ .Ingredients.Num3 }}  {{ .Quantities.Num3 }}
+                                    <br>　　{{ .Ingredients.Num4 }}  {{ .Quantities.Num4 }}
+                                    <br>　　{{ .Ingredients.Num5 }}  {{ .Quantities.Num1 }}
+                                    <br>　　{{ .Ingredients.Num6 }}  {{ .Quantities.Num6 }}
+                                    <br>　　{{ .Ingredients.Num7 }}  {{ .Quantities.Num7 }}
+                                    <br>　　{{ .Ingredients.Num8 }}  {{ .Quantities.Num8 }}
+                                    <br>　　{{ .Ingredients.Num9 }}  {{ .Quantities.Num9 }}
+                                    <br>　　{{ .Ingredients.Num10 }}  {{ .Quantities.Num10 }}
+                                    
+                                    
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
+                                        <form method="post" action="/new">
+                                            <div class="database">
+                                                <p>名前<input type="text" name="title" size="30" value={{ .Title }} ></p>
+                                                <p>名前<input type="text" name="ingredients1" size="30" value={{ .Ingredients.Num1 }} ></p>
+                                                <p>名前<input type="text" name="ingredients2" size="30" value={{ .Ingredients.Num2 }} ></p>
+                                                <p>名前<input type="text" name="ingredients3" size="30" value={{ .Ingredients.Num3 }} ></p>
+                                                <p>名前<input type="text" name="ingredients4" size="30" value={{ .Ingredients.Num4 }} ></p>
+                                                <p>名前<input type="text" name="ingredients5" size="30" value={{ .Ingredients.Num5 }} ></p>
+                                                <p>名前<input type="text" name="ingredients6" size="30" value={{ .Ingredients.Num6 }} ></p>
+                                                <p>名前<input type="text" name="ingredients7" size="30" value={{ .Ingredients.Num7 }} ></p>
+                                                <p>名前<input type="text" name="ingredients8" size="30" value={{ .Ingredients.Num8 }} ></p>
+                                                <p>名前<input type="text" name="ingredients9" size="30" value={{ .Ingredients.Num9 }} ></p>
+                                                <p>名前<input type="text" name="ingredients10" size="30" value={{ .Ingredients.Num10 }} ></p>
+                                                <p>名前<input type="text" name="quantities1" size="30" value={{ .Quantities.Num1 }} ></p>
+                                                <p>名前<input type="text" name="quantities2" size="30" value={{ .Quantities.Num2 }} ></p>
+                                                <p>名前<input type="text" name="quantities3" size="30" value={{ .Quantities.Num3 }} ></p>
+                                                <p>名前<input type="text" name="quantities4" size="30" value={{ .Quantities.Num4 }} ></p>
+                                                <p>名前<input type="text" name="quantities5" size="30" value={{ .Quantities.Num5 }} ></p>
+                                                <p>名前<input type="text" name="quantities6" size="30" value={{ .Quantities.Num6 }} ></p>
+                                                <p>名前<input type="text" name="quantities7" size="30" value={{ .Quantities.Num7 }} ></p>
+                                                <p>名前<input type="text" name="quantities8" size="30" value={{ .Quantities.Num8 }} ></p>
+                                                <p>名前<input type="text" name="quantities9" size="30" value={{ .Quantities.Num9 }} ></p>
+                                                <p>名前<input type="text" name="quantities10" size="30" value={{ .Quantities.Num10 }} ></p>
+                                                <p>名前<input type="text" name="calorie" size="30" value={{ .Calorie }} ></p>
+                                                <p>名前<input type="text" name="image" size="30" value={{ .Image }} ></p>
+                                                <p>名前<input type="text" name="link" size="30" value={{ .Link }} ></p>
+                                            </div>
+                                            <a href="{{ .Link }}">
+                                                <button type="button" class="btn btn-sm btn-secondary">リンクに飛ぶ！</button>
+                                            </a>
+                                            <button type="submit" value="Send" class="btn btn-sm btn-warning ">いいね！</button>
+                                        </form>
+                                        
                                     </div>
+                                    <small class="text-muted">{{ .Calorie }}kcal</small>
                                 </div>
                             </div>
                         </div>
