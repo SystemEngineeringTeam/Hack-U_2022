@@ -1,25 +1,25 @@
 import pandas as pd
+import json
 
-def main():
-    df = pd.read_csv('mets.csv')
+def main(weight,major,consume):
+  with open('json/consume.json', 'w') as f:
+    df = pd.read_csv('python/mets.csv')
 
-    # 60kgの人
-    weight = 60
-    # 大分類(major-heading)
-    major = '家での活動'
-    # 消費したいカロリー kcal
-    consume = 100
+    # # 60kgの人
+    # weight = 60
+    # # 大分類(major-heading)
+    # major = '家での活動'
+    # # 消費したいカロリー kcal
+    # consume = 100
 
     df = df[df['major_heading']==major]
     df = df.sort_values('mets', ascending=False)
 
     for index, row in df.iterrows():
       minutes = int(60 * consume / (row['mets'] * weight * 1.05) )
-      print(minutes,'分 ',row['specific_activities'])
-
-
-
-
+      d = {'Activity':row['specific_activities'], 'minutes':minutes}
+      json.dump(d, f, indent = 4, ensure_ascii=False)
+    f.close()
 
 if __name__ == "__main__":
-    main()
+    main(60,'自転車',100)
