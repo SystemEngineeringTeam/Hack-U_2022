@@ -10,48 +10,40 @@ import (
 )
 
 type Cooking struct {
-	Title       string `json:"title"`
-	Ingredients struct {
-		Num0 string `json:"0"`
-		Num1 string `json:"1"`
-		Num2 string `json:"2"`
-		Num3 string `json:"3"`
-		Num4 string `json:"4"`
-		Num5 string `json:"5"`
-		Num6 string `json:"6"`
-	} `json:"ingredients"`
-	Quantities struct {
-		Num0 string `json:"0"`
-		Num1 string `json:"1"`
-		Num2 string `json:"2"`
-		Num3 string `json:"3"`
-		Num4 string `json:"4"`
-		Num5 string `json:"5"`
-		Num6 string `json:"6"`
-	} `json:"quantities"`
-	Calorie float64 `json:"calorie"`
-	Image   string  `json:"image"`
-	Link    string  `json:"link"`
+	Title       string      `json:"title"`
+	Ingredients Ingredients `json:"ingredients"`
+	Quantities  Quantities  `json:"quantities"`
+	Calorie     string      `json:"calorie"`
+	Image       string      `json:"image"`
+	Link        string      `json:"link"`
 }
 
 type Ingredients struct {
-	Num0 string `json:"0"`
-	Num1 string `json:"1"`
-	Num2 string `json:"2"`
-	Num3 string `json:"3"`
-	Num4 string `json:"4"`
-	Num5 string `json:"5"`
-	Num6 string `json:"6"`
+	Num0  string `json:"0"`
+	Num1  string `json:"1"`
+	Num2  string `json:"2"`
+	Num3  string `json:"3"`
+	Num4  string `json:"4"`
+	Num5  string `json:"5"`
+	Num6  string `json:"6"`
+	Num7  string `json:"7"`
+	Num8  string `json:"8"`
+	Num9  string `json:"9"`
+	Num10 string `json:"10"`
 }
 
 type Quantities struct {
-	Num0 string `json:"0"`
-	Num1 string `json:"1"`
-	Num2 string `json:"2"`
-	Num3 string `json:"3"`
-	Num4 string `json:"4"`
-	Num5 string `json:"5"`
-	Num6 string `json:"6"`
+	Num0  string `json:"0"`
+	Num1  string `json:"1"`
+	Num2  string `json:"2"`
+	Num3  string `json:"3"`
+	Num4  string `json:"4"`
+	Num5  string `json:"5"`
+	Num6  string `json:"6"`
+	Num7  string `json:"7"`
+	Num8  string `json:"8"`
+	Num9  string `json:"9"`
+	Num10 string `json:"10"`
 }
 
 func main() {
