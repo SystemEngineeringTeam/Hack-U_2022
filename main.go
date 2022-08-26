@@ -1,7 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -9,52 +13,41 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Favorite struct {
-	gorm.Model
-	Title         string
-	Ingredients1  string
-	Ingredients2  string
-	Ingredients3  string
-	Ingredients4  string
-	Ingredients5  string
-	Ingredients6  string
-	Ingredients7  string
-	Ingredients8  string
-	Ingredients9  string
-	Ingredients10 string
-	Ingredients11 string
-	Ingredients12 string
-	Ingredients13 string
-	Ingredients14 string
-	Ingredients15 string
-	Ingredients16 string
-	Ingredients17 string
-	Ingredients18 string
-	Ingredients19 string
-	Ingredients20 string
-	Quantity1     string
-	Quantity2     string
-	Quantity3     string
-	Quantity4     string
-	Quantity5     string
-	Quantity6     string
-	Quantity7     string
-	Quantity8     string
-	Quantity9     string
-	Quantity10    string
-	Quantity11    string
-	Quantity12    string
-	Quantity13    string
-	Quantity14    string
-	Quantity15    string
-	Quantity16    string
-	Quantity17    string
-	Quantity18    string
-	Quantity19    string
-	Quantity20    string
-	Calorie       string
-	Image         string
-	Link          string
+type Cooking struct {
+	Title       string      `json:"title"`
+	Ingredients Ingredients `json:"ingredients"`
+	Quantities  Quantities  `json:"quantities"`
+	Calorie     int         `json:"calorie"`
+	Image       string      `json:"image"`
+	Link        string      `json:"link"`
+}
+
+type Ingredients struct {
+	Num0  string `json:"0"`
+	Num1  string `json:"1"`
+	Num2  string `json:"2"`
+	Num3  string `json:"3"`
+	Num4  string `json:"4"`
+	Num5  string `json:"5"`
+	Num6  string `json:"6"`
+	Num7  string `json:"7"`
+	Num8  string `json:"8"`
+	Num9  string `json:"9"`
+	Num10 string `json:"10"`
+}
+
+type Quantities struct {
+	Num0  string `json:"0"`
+	Num1  string `json:"1"`
+	Num2  string `json:"2"`
+	Num3  string `json:"3"`
+	Num4  string `json:"4"`
+	Num5  string `json:"5"`
+	Num6  string `json:"6"`
+	Num7  string `json:"7"`
+	Num8  string `json:"8"`
+	Num9  string `json:"9"`
+	Num10 string `json:"10"`
 }
 
 func main() {
@@ -68,13 +61,20 @@ func main() {
 
 	//home.htmlに遷移
 	router.GET("/", func(ctx *gin.Context) {
-		db := sqlConnect()
-		var favorites []Favorite
-		db.Order("created_at asc").Find(&favorites)
-		defer db.Close()
+		//多言語json
+		json_lang_file, err := ioutil.ReadFile("json/sample.json")
+		if err != nil {
+			log.Println("ReadError: ", err)
+			os.Exit(1)
+		}
+
+		var cooking []Cooking
+		json.Unmarshal(json_lang_file, &cooking)
+
+		fmt.Println(cooking[3].Calorie)
 
 		ctx.HTML(200, "home.html", gin.H{
-			"favorites": favorites,
+			"cooking": cooking,
 		})
 	})
 
@@ -196,4 +196,52 @@ func sqlConnect() (database *gorm.DB) {
 	}
 
 	return db
+}
+
+type Favorite struct {
+	gorm.Model
+	Title         string
+	Ingredients1  string
+	Ingredients2  string
+	Ingredients3  string
+	Ingredients4  string
+	Ingredients5  string
+	Ingredients6  string
+	Ingredients7  string
+	Ingredients8  string
+	Ingredients9  string
+	Ingredients10 string
+	Ingredients11 string
+	Ingredients12 string
+	Ingredients13 string
+	Ingredients14 string
+	Ingredients15 string
+	Ingredients16 string
+	Ingredients17 string
+	Ingredients18 string
+	Ingredients19 string
+	Ingredients20 string
+	Quantity1     string
+	Quantity2     string
+	Quantity3     string
+	Quantity4     string
+	Quantity5     string
+	Quantity6     string
+	Quantity7     string
+	Quantity8     string
+	Quantity9     string
+	Quantity10    string
+	Quantity11    string
+	Quantity12    string
+	Quantity13    string
+	Quantity14    string
+	Quantity15    string
+	Quantity16    string
+	Quantity17    string
+	Quantity18    string
+	Quantity19    string
+	Quantity20    string
+	Calorie       string
+	Image         string
+	Link          string
 }
