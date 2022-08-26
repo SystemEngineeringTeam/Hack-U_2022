@@ -122,19 +122,61 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">料理名を入れてね！</h1>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="キーワードを入力">
-                        <button class="btn btn-outline-success" type="button" id="button-addon2"><i
-                                class="fas fa-search"></i> 検索</button>
-                    </div>
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">ロードする！</a>
-                        <a href="#" class="btn btn-secondary my-2">書き直す！</a>
-                    </p>
+                    <h1 class="fw-light">お気に入りレシピの一覧だよ！</h1>
                 </div>
             </div>
         </section>
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                    
+                    <div class="col">
+
+
+
+                        <div class="card shadow-sm">
+                            <div class="collapse bg-dark" id="navbarHeader">
+                                <div class="container">
+                                    <div class="row">
+                                        <a href="favorites.html" class="navbar-brand col-sm-8 col-md-7 py-4">
+                                            <h4 class="text-white">カロリー計算をしてみる！</h4>
+                                            <p class="text-muted">自分が食べたカロリーを入力してどれくらいの運動をしたらいいかみてみよう！</p>
+                                        </a>
+                                        <a href="calclator.html" class="navbar-brand col-sm-8 offset-md-1 py-4">
+                                            <h4 class="text-white">お気に入りのレシピを表示する！</h4>
+                                            <p class="text-muted">自分がいいねしたレシピの一覧を振り返ってみよう！</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                            {{ range .favorites }}
+
+                            <img src={{ .Link }}
+                                width="100%" height="100%" fill="#55595c">
+                            <div class="card-body">
+                                <p id ="title1" class="card-text">
+                                    {{ .Title }}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
+                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
+                                    </div>
+                                </div>
+                                {{end}}
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         
     </main>
