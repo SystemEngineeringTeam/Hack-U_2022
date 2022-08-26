@@ -2,6 +2,7 @@ import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 import tweepy
+from datetime import datetime,timedelta
 
 
 
@@ -29,35 +30,48 @@ client = tweepy.Client(
 )
 
 def printTweetBySearch(s):
-    # 100件　* 10回取得 = 1000件
-    # for i in range(3):
-    tweets = client.search_recent_tweets(
-        query=s,  # 検索ワード
-        max_results=100,  # 取得件数
-        tweet_fields = ['entities','public_metrics'],
-    )
+
+    now = datetime.now()
+    now = now.replace(minute=0, second=0, microsecond=0)
+    end_time_tweepy = str(now.isoformat())+'+09:00'
+    start_time = now - timedelta(days=6) 
+    start_time_tweepy = str(start_time.isoformat())+'+09:00'
 
     texts = []
     links = []
-    # print(tweets)                  # ツイート内容
-    for tweet in tweets.data:
+    pictures = []
+    for tweet in tweepy.Paginator(client.search_recent_tweets, 
+                            query=s+'レシピ has:images', start_time=start_time_tweepy, end_time=end_time_tweepy,
+                            tweet_fields=['entities','public_metrics'], 
+                            max_results=100).flatten(limit=1000):
+        # print(tweet)
         #いいねが5以上
         if tweet.public_metrics["like_count"] > 5:
-            print("--------------------")
-            print(tweet.id)
-            print(tweet.public_metrics["like_count"])
-            print(tweet.text)
-            texts.append(tweet.text)
-            urls = tweet.entities['urls']
-            urls = urls[0]
-            links.append(urls['url'])
+            
+                print("--------------------")
+                print(tweet.id)
+                # print(tweet.public_metrics["like_count"])
+                # print(tweet.text)
+                texts.append(tweet.text)
 
-    return texts,links
+                #リンク
+                urls = tweet.entities['urls']
+                urls = urls[0]
+                links.append(urls['url'])
+
+                #画像
+                pics = urls['images']
+                pics = pics[0]
+                pictures.append(pics['url'])
+
+            
+
+    return texts,links,pictures
 
 
 def main():
-    texts,links = printTweetBySearch('豚肉　レシピ')
-    print(texts,links)
+    texts,links,pictures = printTweetBySearch('豚')
+    print(texts,links,pictures)
 
 if __name__ == "__main__":
     main()
