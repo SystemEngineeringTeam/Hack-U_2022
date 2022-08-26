@@ -1,0 +1,5 @@
+ターミナル上でdocker-composeのあるディレクトリで
+docker compose build
+docker compose up と順に実行する
+
+http://localhost:8080/でサーバにアクセス
