@@ -139,16 +139,16 @@
         </section>
 
         <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+                    {{ range .cooking }}
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
+                            <img src={{ .Image }}
                                 width="100%" height="100%" fill="#55595c">
                             <div class="card-body">
                                 <p id ="title1" class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
+                                    <strong>{{ .Title }}</strong>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
@@ -159,143 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div id="title2" class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="https://img.cpcdn.com/recipes/7285907/894x1461s/8be4429eac94ed3d062ef60927b67fd5?u=4306597&p=1660655927"
-                                width="100%" height="100%" fill="#55595c">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <strong>レシピ投稿祭 大葉チーズin豚巻ピーマン</strong>
-                                </p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-secondary">レシピを見る！</button>
-                                        <button type="button" class="btn btn-sm btn-warning ">いいね！</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{ end }}
                 </div>
             </div>
         </div>

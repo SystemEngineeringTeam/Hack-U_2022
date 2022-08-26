@@ -1,7 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +17,7 @@ type Cooking struct {
 	Title       string      `json:"title"`
 	Ingredients Ingredients `json:"ingredients"`
 	Quantities  Quantities  `json:"quantities"`
-	Calorie     string      `json:"calorie"`
+	Calorie     int         `json:"calorie"`
 	Image       string      `json:"image"`
 	Link        string      `json:"link"`
 }
@@ -57,13 +61,20 @@ func main() {
 
 	//home.htmlに遷移
 	router.GET("/", func(ctx *gin.Context) {
-		db := sqlConnect()
-		var favorites []Favorite
-		db.Order("created_at asc").Find(&favorites)
-		defer db.Close()
+		//多言語json
+		json_lang_file, err := ioutil.ReadFile("json/sample.json")
+		if err != nil {
+			log.Println("ReadError: ", err)
+			os.Exit(1)
+		}
+
+		var cooking []Cooking
+		json.Unmarshal(json_lang_file, &cooking)
+
+		fmt.Println(cooking[3].Calorie)
 
 		ctx.HTML(200, "home.html", gin.H{
-			"favorites": favorites,
+			"cooking": cooking,
 		})
 	})
 
