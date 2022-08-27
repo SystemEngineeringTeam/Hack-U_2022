@@ -162,6 +162,18 @@ func main() {
 
 		ctx.Redirect(302, "/")
 	})
+
+	// outer.POST("/newcalc", func(ctx *gin.Context) {
+	// 	db := sqlConnect()
+	// 	activity := ctx.PostForm("activity")
+	// 	minutes := ctx.PostForm("minutes")
+
+	// 	//fmt.Println("create user " + name + " with email " + email)
+	// 	db.Create(&Consume{Activity: activity, Minutes: minutes})
+	// 	defer db.Close()
+
+	// 	ctx.Redirect(302, "/")
+	// })
 	router.Run()
 }
 

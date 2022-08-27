@@ -28,4 +28,4 @@ def main(weight,major,consume):
     f.close()
 
 if __name__ == "__main__":
-    main(60,'自転車',100)
+    main(50,'家での活動',100)
