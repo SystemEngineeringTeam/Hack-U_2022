@@ -52,6 +52,11 @@ type Quantities struct {
 	Num10 string `json:"10"`
 }
 
+type Consume struct {
+	Activity      string     `json:"Activity"`
+	Minutes     int         `json:"minutes"`
+}
+
 func main() {
 	fmt.Printf("Hello World!")
 	db := sqlConnect()
@@ -78,6 +83,8 @@ func main() {
 		})
 	})
 
+
+
 	//favorites.htmlに遷移
 	router.GET("/favorites/", func(ctx *gin.Context) {
 		db := sqlConnect()
@@ -92,13 +99,18 @@ func main() {
 
 	//calculation.htmlに遷移
 	router.GET("/calclator/", func(ctx *gin.Context) {
-		db := sqlConnect()
-		var favorites []Favorite
-		db.Find(&favorites)
-		defer db.Close()
+		//多言語json
+		json_lang_file, err := ioutil.ReadFile("json/consume.json")
+		if err != nil {
+			log.Println("ReadError: ", err)
+			os.Exit(1)
+		}
+		var consume []Consume
+		json.Unmarshal(json_lang_file, &consume)
 
 		ctx.HTML(200, "calclator.html", gin.H{
-			"favorites": favorites,
+			// "activitty" : activity,
+			// "minutes": minutes,
 		})
 	})
 
@@ -126,6 +138,16 @@ func main() {
 
 		ctx.Redirect(302, "/")
 	})
+
+		//pythonを実行する
+		router.GET("/calcload/", func(ctx *gin.Context) {
+			out, err := http.Get("http://host.docker.internal:8087")
+	
+			fmt.Println(out)
+			fmt.Println(err)
+	
+			ctx.Redirect(302, "/")
+		})
 
 	router.POST("/new", func(ctx *gin.Context) {
 		db := sqlConnect()
@@ -165,6 +187,18 @@ func main() {
 
 		ctx.Redirect(302, "/")
 	})
+
+	// outer.POST("/newcalc", func(ctx *gin.Context) {
+	// 	db := sqlConnect()
+	// 	activity := ctx.PostForm("activity")
+	// 	minutes := ctx.PostForm("minutes")
+
+	// 	//fmt.Println("create user " + name + " with email " + email)
+	// 	db.Create(&Consume{Activity: activity, Minutes: minutes})
+	// 	defer db.Close()
+
+	// 	ctx.Redirect(302, "/")
+	// })
 	router.Run()
 }
 

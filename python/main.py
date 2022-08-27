@@ -49,7 +49,7 @@ def quantity_convert(quantity):
 
 
 def main():
-    food = 'たまご'
+    food = 'ラーメン'
 # スクレイピングしてjsonに書き込む
     with open('/Users/k20025/src/Hack-U_2022/json/recipe.json', 'w') as f:
 
