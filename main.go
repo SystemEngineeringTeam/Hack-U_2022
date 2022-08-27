@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"strconv"
 	"time"
 
@@ -114,6 +115,19 @@ func main() {
 		defer db.Close()
 
 		ctx.Redirect(302, "/favorites/")
+	})
+
+	//pythonを実行する
+	router.GET("/load/", func(ctx *gin.Context) {
+
+		out, err := exec.Command("python3", "/Users/k21116kk/src/Hack-U_2022/python/main.py").Output()
+		if err != nil {
+			panic("error")
+		}
+
+		fmt.Println(out)
+
+		ctx.Redirect(302, "/")
 	})
 
 	router.POST("/new", func(ctx *gin.Context) {
