@@ -51,6 +51,11 @@ type Quantities struct {
 	Num10 string `json:"10"`
 }
 
+type Consumes struct {
+	Activity string `json:"activity"`
+	Minutes  string `json:"minutes"`
+}
+
 func main() {
 	fmt.Printf("Hello World!")
 	db := sqlConnect()
