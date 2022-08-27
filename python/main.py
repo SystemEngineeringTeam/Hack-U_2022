@@ -43,9 +43,7 @@ def quantity_convert(quantity):
     if '小さじ' in quantity:
       return int(re.sub(r"\D", "", quantity))*5
 
-    match quantity:
-      case _:
-        return 5
+    return 5
 
 
 
