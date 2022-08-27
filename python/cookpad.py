@@ -6,10 +6,8 @@ import chromedriver_binary
 import time
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.by import By
-from functools import cache
 
 
-@cache
 def crawler(food):
     #読み込み待ち回避
     desired = DesiredCapabilities().CHROME
