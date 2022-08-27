@@ -139,9 +139,12 @@ func main() {
 		quantities8 := ctx.PostForm("quantities8")
 		quantities9 := ctx.PostForm("quantities9")
 		quantities10 := ctx.PostForm("quantities10")
-		calorie := ctx.PostForm("carolie")
+		i := ctx.PostForm("carolie")
 		image := ctx.PostForm("image")
 		link := ctx.PostForm("link")
+
+		var calorie int
+		calorie, _ = strconv.Atoi(i)
 
 		//fmt.Println("create user " + name + " with email " + email)
 		db.Create(&Favorite{Title: title,
@@ -211,7 +214,7 @@ type Favorite struct {
 	Quantities8   string
 	Quantities9   string
 	Quantities10  string
-	Calorie       string
+	Calorie       int
 	Image         string
 	Link          string
 }
