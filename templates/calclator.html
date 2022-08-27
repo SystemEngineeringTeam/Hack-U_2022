@@ -130,10 +130,45 @@
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">摂取したカロリーを入力しよう！</h1>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="キーワードを入力">
-                        <button class="btn btn-outline-success" type="button" id="button-addon2"><i
-                                class="fas fa-search"></i>追加！</button>
+                        <input type="text" class="form-control" placeholder="摂取カロリー">
+                        <!-- <button class="btn btn-outline-success" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i>追加！</button> -->
                     </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="体重(kg)">
+                        <!-- <button class="btn btn-outline-success" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i>追加！</button> -->
+                    </div>
+                    <!-- 
+                        大要件　select
+                        ・自転車，コンディショニング運動，ダンス，釣りと狩り，家での活動，家での修繕作業，不活動、安静～安静に近い低強度活動，芝生や庭の手入れ，多方面にわたる活動，
+                        音楽活動，職業，ランニング，セルフケア，性行動，スポーツ，運搬，歩行，水上・水中活動，冬季活動，宗教的な活動，ボランティア活動
+                        体重 input
+                        消費したいカロリー　input
+                    -->
+                    <select name="major" id="major" class="form-select" aria-label="Default select example">
+                        <option value="a">自転車</option>
+                        <option value="b">コンディショニング運動</option>
+                        <option value="c">ダンス</option>
+                        <option value="d">釣りと狩り</option>
+                        <option value="e">家での活動</option>
+                        <option value="f">家での修繕作業</option>
+                        <option value="g">不活動、安静～安静に近い低強度活動</option>
+                        <option value="h">芝生や庭の手入れ</option>
+                        <option value="i">多方面にわたる活動</option>
+                        <option value="j">音楽活動</option>
+                        <option value="k">職業</option>
+                        <option value="l">ランニング</option>
+                        <option value="m">セルフケア</option>
+                        <option value="n">性行動</option>
+                        <option value="o">スポーツ</option>
+                        <option value="p">運搬</option>
+                        <option value="q">歩行</option>
+                        <option value="r">水上・水中活動</option>
+                        <option value="s">冬季活動</option>
+                        <option value="t">宗教的な活動</option>
+                        <option value="">ボランティア活動</option>
+                    </select>
                     <p>
                         <a href="/calcload/" class="btn btn-primary my-2">ロードする！</a>
                         <a href="#" class="btn btn-secondary my-2">書き直す！</a>
@@ -142,6 +177,7 @@
 
                 <form method="post" action="/newcalc">
                     <div class="database">
+                        <!-- jsonから一覧表示 -->
                     </div>
                 </form>
             </div>
