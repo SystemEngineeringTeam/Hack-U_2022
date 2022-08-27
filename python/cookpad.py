@@ -18,7 +18,7 @@ def crawler(food):
 
     options = webdriver.ChromeOptions()
     #画面を表示しない
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     #GPUハードウェアアクセラレーションを無効にする
     options.add_argument('--disable-gpu')
     #ウィンドウサイズの指定

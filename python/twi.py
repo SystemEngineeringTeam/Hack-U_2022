@@ -60,9 +60,12 @@ def printTweetBySearch(s):
                 links.append(urls['url'])
 
                 #画像
-                pics = urls['images']
-                pics = pics[0]
-                pictures.append(pics['url'])
+                try:
+                    pics = urls['images']
+                    pics = pics[0]
+                    pictures.append(pics['url'])
+                except:
+                    pictures.append('')
 
             
 

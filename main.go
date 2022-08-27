@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
 	"strconv"
 	"time"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -119,13 +119,10 @@ func main() {
 
 	//pythonを実行する
 	router.GET("/load/", func(ctx *gin.Context) {
-
-		out, err := exec.Command("python3", "/Users/k21116kk/src/Hack-U_2022/python/main.py").Output()
-		if err != nil {
-			panic("error")
-		}
+		out, err := http.Get("http://host.docker.internal:8086")
 
 		fmt.Println(out)
+		fmt.Println(err)
 
 		ctx.Redirect(302, "/")
 	})

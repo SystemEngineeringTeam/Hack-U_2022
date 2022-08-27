@@ -8,7 +8,7 @@ import cookpad
 import twi 
 import sys
 
-df_calorie = pd.read_csv('python/calorie.csv')
+df_calorie = pd.read_csv('/Users/k20025/src/Hack-U_2022/python/calorie.csv')
 
 # food_number     int64
 # food_name      object
@@ -49,9 +49,10 @@ def quantity_convert(quantity):
 
 
 def main():
-    food = ''
+    food = 'たまご'
 # スクレイピングしてjsonに書き込む
-    with open('json/recipe.json', 'w') as f:
+    with open('/Users/k20025/src/Hack-U_2022/json/recipe.json', 'w') as f:
+
       f.write('[')
       # food = '豚肉'      #検索したい食材
       # 辞書を要素に持つリストが返る
@@ -80,7 +81,7 @@ def main():
       f.close()
 
 #twitter
-    with open('json/twitter.json', 'w') as f:
+    with open('/Users/k20025/src/Hack-U_2022/json/twitter.json', 'w') as f:
       f.write('[')
       texts, links, pictures = twi.printTweetBySearch(food)
       # texts = ['米粉のパンケーキ\n#白崎茶会 さんのレシピよりhttps://t.co/b92RGniIeh\n米粉、甘酒、BP等を使い、梨のコンポートも添えて\n材料の濃縮タイプ甘酒は糀と餅で作った甘酒をブレンダにかけ用意\n\n小麦、卵、乳無しで不安だったけど、きちんと膨らんでくれて安心\n\n#ランチ #おうちごはん #手作りおやつ https://t.co/HIy3qLDpI0', '【ふっくらとした卵そぼろ】\n\nコンビニ弁当などのふっくら甘い卵そぼろを再現！\nかき混ぜ器を使う事で失敗しないレシピになっています♪\n\nhttps://t.co/9GiCOtq0HV\n\n#料理男子\n#料理好きな人と繋がりたい\n#クックパッド\n#クックパッドアンバサダー2022\n#cookpad_news https://t.co/ictCEiMIZU', 'こんにちは🌞\n毎月19日は熟成の日！😌💛\nグランドアルトバイエルンと卵マヨの包み焼きのご紹介です！😉餃子の皮が余ったときに嬉しいアレンジレシピです🥟✨おつまみにぴったりですよ！🍻今日の晩酌のお供にいかがでしょうか？🥰溢れる肉汁がたまらないです～！🥺 https://t.co/gecCIcNSzR', 'みて！この美味しそうなチャプチェとふわふわの卵スープ🤤❤️！\u3000お店のスープみたいやろ？\u3000でもなんとワイ作や✌️✨笑\u3000昨日の晩ごはんは、食事処さくらさん（@mo224co ）のレシピ本で作ってみたの😻✨\u3000ほんのちょっとのコツでこんなに上手なれるなんてハーン感激😭✨めっちゃオススメです😇❤️ https://t.co/8XIJKgQNKR', '今日の1品は…\n\n大葉ツナたまごごはん♪\n\n卵かけごはんのアレンジレシピ♪\n忙しい朝におすすめ😋\n\n＜アメブロ＞\nhttps://t.co/buDXY3WGO6\n\n＜YouTube＞\nhttps://t.co/Q6kCFq2gmP\n\n#料理好きさんと繋がりたい #Twitter料理部 #お腹ぺコリン部 #今日の1品 https://t.co/klNHyN0zRr']
@@ -96,5 +97,5 @@ def main():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
 
