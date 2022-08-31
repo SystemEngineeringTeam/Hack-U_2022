@@ -51,6 +51,11 @@ type Quantities struct {
 	Num10 string `json:"10"`
 }
 
+type Consumes struct {
+	Activity string `json:"activity"`
+	Minutes  string `json:"minutes"`
+}
+
 func main() {
 	fmt.Printf("Hello World!")
 	db := sqlConnect()
@@ -139,9 +144,12 @@ func main() {
 		quantities8 := ctx.PostForm("quantities8")
 		quantities9 := ctx.PostForm("quantities9")
 		quantities10 := ctx.PostForm("quantities10")
-		calorie := ctx.PostForm("carolie")
+		i := ctx.PostForm("carolie")
 		image := ctx.PostForm("image")
 		link := ctx.PostForm("link")
+
+		var calorie int
+		calorie, _ = strconv.Atoi(i)
 
 		//fmt.Println("create user " + name + " with email " + email)
 		db.Create(&Favorite{Title: title,
@@ -154,6 +162,18 @@ func main() {
 
 		ctx.Redirect(302, "/")
 	})
+
+	// outer.POST("/newcalc", func(ctx *gin.Context) {
+	// 	db := sqlConnect()
+	// 	activity := ctx.PostForm("activity")
+	// 	minutes := ctx.PostForm("minutes")
+
+	// 	//fmt.Println("create user " + name + " with email " + email)
+	// 	db.Create(&Consume{Activity: activity, Minutes: minutes})
+	// 	defer db.Close()
+
+	// 	ctx.Redirect(302, "/")
+	// })
 	router.Run()
 }
 
@@ -211,7 +231,7 @@ type Favorite struct {
 	Quantities8   string
 	Quantities9   string
 	Quantities10  string
-	Calorie       string
+	Calorie       int
 	Image         string
 	Link          string
 }

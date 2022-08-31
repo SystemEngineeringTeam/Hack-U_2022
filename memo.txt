@@ -1,4 +1,4 @@
-(docker-compose.ymlのある場所で)
+(docker-compose.ymlのある場所でDockerを立ち上げてから)
 docker compose build 
 docker compose up　
 
@@ -8,8 +8,11 @@ docker exec -it hack-u_2022-db-1 bash
 mysql -u root -p
 (パスワード　＝　root)
 (mysqlにログイン)
-use go_database;
-select * from users;
-(ユーザーテーブルの表示)
+
+select * from go_database.favorites;
+(いいね欄のテーブルの表示)
+
+DROP TABLE go_database.favorites;
+(いいね欄の初期化)
 
 http://localhost:8080/で作成したサーバにアクセス
