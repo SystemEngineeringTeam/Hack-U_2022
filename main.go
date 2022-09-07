@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -51,7 +52,7 @@ type Quantities struct {
 	Num10 string `json:"10"`
 }
 
-type Consumes struct {
+type Consume struct {
 	Activity string `json:"activity"`
 	Minutes  string `json:"minutes"`
 }
@@ -96,14 +97,39 @@ func main() {
 
 	//calculation.htmlに遷移
 	router.GET("/calclator/", func(ctx *gin.Context) {
-		db := sqlConnect()
-		var favorites []Favorite
-		db.Find(&favorites)
-		defer db.Close()
+		//多言語json
+		json_lang_file, err := ioutil.ReadFile("json/consume.json")
+		if err != nil {
+			log.Println("ReadError: ", err)
+			os.Exit(1)
+		}
+		var consume []Consume
+		json.Unmarshal(json_lang_file, &consume)
 
 		ctx.HTML(200, "calclator.html", gin.H{
-			"favorites": favorites,
+			// "activitty" : activity,
+			// "minutes": minutes,
 		})
+	})
+
+	//pythonを実行する
+	router.GET("/load/", func(ctx *gin.Context) {
+		out, err := http.Get("http://host.docker.internal:8086")
+
+		fmt.Println(out)
+		fmt.Println(err)
+
+		ctx.Redirect(302, "/")
+	})
+
+	//pythonを実行する
+	router.GET("/calcload/", func(ctx *gin.Context) {
+		out, err := http.Get("http://host.docker.internal:8087")
+
+		fmt.Println(out)
+		fmt.Println(err)
+
+		ctx.Redirect(302, "/")
 	})
 
 	router.POST("/delete/:id", func(ctx *gin.Context) {
